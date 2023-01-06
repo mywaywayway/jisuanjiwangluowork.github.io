@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<head>
+<title>计算机网络实验报告</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="author" content="darkmirrors_bj _bj" />
+<link rel="stylesheet" href="index.css" />
+<!--[if IE 6]><script>document.execCommand("BackgroundImageCache", false, true)</script><![endif]-->
+</head>
+
+<body>
+	<div class="doc">
+		<div class="header">
+			
+		</div>
+		<div class="wraper">
+            <h1 >计算机网络实验报告</h1>
+			<div>
+                <h2>验证性实验</h2>
+                <div>
+                    <div>
+                        <h3>1.ipconfig</h3>
+                       <h4>实作1</h4>
+                    <p>使用 ipconfig/all 查看自己计算机的网络配置，尽可能明白每行的意思，特别注意 IP 地址、子网掩码 Subnet Mask、网关 Gateway。</p>
+                   <img src="picture\$2HCL2A}D~99{C3M)YN(OQT.png" alt="ipcomfig/all" width="500px" height="500px"/>
+                    <p>ip地址，网关，子网掩码，网关</p>
+                   <img src="picture\{UFZ3{6CK8PLGM9M(H~J1{5.png" alt=" " width="50%" />
+                    <p>ip地址是一台主机在网络层的地址，分为网络号和主机号两部分；本机IP地址为192.168.3.104；子网掩码为：255.255.255.0
+                        网关为：192.168.3.1
+                    </p>
+                     <h4>实作2</h4>
+                     <img  src="picture\jisuanji2.png" alt="另一台计算机" width="50%"/>
+                        <p>使用 ipconfig/all 查看旁边计算机的网络配置，看看有什么异同。</p>
+                        <p>问题：你的计算机和旁边的计算机是否处于同一子网，为什么？</p>
+                        <p>答：相同，这是同一网络下的另一台计算机的ipconfig结果，将ip和掩码进行与操作得到同样的结果相同，在同一子网</p>
+               
+                    </div>
+                    <div>
+                        <h3>2.Ping</h3>
+                        <h4>实作1</h4>
+                        <p>要测试到某计算机如 重庆交通大学 Web 服务器的连通性，可以使用 ping www.cqjtu.edu.cn 命令，也可直接使用 IP 地址。</p>
+                        <p>请掌握使用该命令后屏幕显示的反馈回来信息的意思，如：TTL、时间等。</p>
+                         <img src="picture\pingcqjt.png" width="50%" />
+                         <p>TTL:是指该字段指定IP包被路由器丢弃之前允许通过的最大网段数量,就是能通过几个路由器，每过一个减一；32字节值数据都是32字节；时间是往返时间。</p>
+                        <h4>实作2</h4>
+                        <p>使用 ping/? 命令了解该命令的各种选项并实际使用。</p>
+                         <img src="picture\pingwenhao.png" width="50%"/>
+                         <p>问题：假设在秘籍中进行的网络排查中，ping 百度的 IP 即 ping 14.215.177.39 没问题，但 ping 百度的域名即 ping www.baidu.com 不行，那么可能的原因是什么？如何进行验证和解决？</p>
+                         <p> 回答：可能是DNS出错，将电脑的DNS设为8.8.8.8</p>
+                    
+                    </div>
+                    <div>
+                        <h3>3.tracert</h3>
+                        <h4>实作1</h4>
+                        <p>要了解到某计算机如 www.baidu.com 中间经过了哪些节点（路由器）及其它状态，可使用 tracert www.baidu.com 命令，查看反馈的信息，了解节点的个数。</p>
+                         <img src="picture\zhuizhong.png" width="50%"/>
+                         <p>用网站解析ip位置</p>
+                         <img src="picture\diyi.png" width="50%"/>
+                         <img src="picture\dier.png" width="50%" />
+                         <img src="picture\disan.png" width="50%" />
+                         <img src="picture\disichongqidianxin.png" width="50%" />
+                         <img src="picture\diwu.png" width="50%" />
+                         <img src="picture\diliu.png" width="50%" />
+                         <h4>实作1</h4>
+                         <p>ping.pe 这个网站可以探测从全球主要的 ISP 到某站点如 https://qige.io 的线路状态，当然也包括各线路到该主机的路由情况。请使用浏览器访问 http://ping.pe/qige.io 进行了解。</p>
+                         <img src="picture\pingiolujin.png" width="50%"/>
+                         <p><h5>问题1</h5> tracert 能告诉我们路径上的节点以及大致的延迟等信息，那么它背后的原理是什么？本问题可结合第二部分的 Wireshark 实验进行验证。</p>
+                         <p>tracert背后的原理就是基于IP包中的TTL，每当数据包经过一个路由器，其存活时间就会减1。当其存活时间是0时，主机便取消数据包，并发送一个ICMP TTL数据包给原数据包的发出者。
+                            计算机发出TTL从1开始逐次加一的ICMP报文，通过返回的ICMP报文得到沿途IP信息。</p>
+                            <p>tracert www.baidu.com的部分抓包信息</p>
+                            <img src="picture\zhuabao1.png" width="50%"/>
+                            <p>ttl不断变大，直到大到设定值就会被丢掉返回给发送方</p>
+                            <h5>问题2</h5>
+                            <p>在以上两个实作中，如果你留意路径中的节点，你会发现无论是访问百度还是棋歌教学网，路径中的第一跳都是相同的，甚至你应该发现似乎前几个节点都是相同的，你的解释是什么？</p>
+                            <h5>回答</h5>
+                            <p>第一跳为子网出口路由器接口地址，所以主机发送的都会经过这里，所以相同。前几跳相同表明该子网出口流量必经过前几跳ip代表的路由器</p>
+                            <h5>问题3</h5>
+                            <p>在追踪过程中，你可能会看到路径中某些节点显示为 * 号，这是发生了什么？</p>
+                            <h5>回答</h5>
+                            <p>可能是因为信息安全问题或者是权限问题没有得到回复只是经过了路由器结点</p>
+                    </div>
+                    <div>
+                        <h3>4.ARP</h3>
+                        <p>ARP（Address Resolution Protocol）即地址解析协议，是用于根据给定网络层地址即 IP</p>
+                        <p> 地址，查找并得到其对应的数据链路层地址即 MAC地址的协议。 ARP 协议定义在 1982 年的 RFC 826。</p>
+                        <h4>实作1</h4>
+                        <p>运行 arp -a 命令查看当前的 arp 缓存， 请留意缓存了些什么。</p>
+                            <img  src="picture\arp-a.png" width="50%" />
+                         <p>ping 一下你旁边的计算机 IP（注意，需保证该计算机的 IP 没有出现在 arp 缓存中，或者使用 arp -d * 先删除全部缓存），再次查看缓存，你会发现一些改变，请作出解释。</p> 
+                         <p>ping了在同一子网下的计算机</p>
+                         <img src="picture\arp-1.png" width="50%"/>
+                         <p>发现多了一个动态地址</p>
+                        <h4>实作2</h4>
+                        <p>请使用 arp /? 命令了解该命令的各种选项。 </p>
+                        <img src="picture\arptwo.png" width="50%" />
+                        <h4>实作3</h4>
+                        <p>一般而言，arp 缓存里常常会有网关的缓存，并且是动态类型的。 </p>   
+                        <p>假设当前网关的 IP 地址是 192.168.0.1，MAC 地址是 5c-d9-98-f1-89-64，请使用 arp -s 192.168.0.1 5c-d9-98-f1-89-64 命令设置其为静态类型的。</p>
+                        <h5>回答</h5>
+                        <p>ip地址为：192.168.3.1，MAC地址为： 3c-06-a7-78-77-93，输入命令得到</p>
+                        <img src="picture\arpthree1.png" width="50%" />
+                        <p>后来在网上查询解决方法，用powershell以管理员方式运行来解决 输入netsh i i show in 先找出当前的网卡idx号,netsh -c i i add neighbors “idx” “ip地址” “物理地址”.</p>
+                        <p>最后得到的结果</p>
+                        <img src="picture\arpthree.png" width="50%"/>
+                         <h5>问题</h5>
+                         <p>在实作三中，为何缓存中常常有网关的信息？</p>
+                         <p>我们将网关或其它计算机的 arp 信息设置为静态有什么优缺点？</p>
+                         <h5>回答</h5>
+                         <p>有网关信息方便下次访问</p>
+                         <p>优点：稳定，可以有效避免网络攻击</p>
+                         <p>缺点：不够灵活，维护麻烦</p>
+                    </div>
+                    <div>
+                        <h3>5.DHCP</h3>
+                        <h4>实作一</h4>
+                        <p>一般地，我们自动获取的网络配置信息包括：IP 地址、子网掩码、网关 IP 以及 DNS 服务器 IP 等。使用 ipconfig/release 命令释放自动获取的网络配置，并用 ipconfig/renew 命令重新获取，了解 DHCP 工作过程和原理。</p>
+                       <p>下面是ipconfig/release ，ipconfig/renew两个命令的运行结果</p>
+                        <img src="picture\configrelease.png" width="50%"/>
+                        <img src="picture\configrenew.png" width="50%"/>
+                        <h5>问题</h5>
+                        <p>如果你没能成功的释放，请思考有哪些可能的原因并着手进行解决？</p>
+                        <h5>回答</h5>
+                        <p>可能是权限问题，需要用管理员权限进行操作，还有可能是指令输错了，我经常这样，检查指令是否拼写正确</p>
+                        <h5>问题</h5>
+                        <p>在Windows系统下，如果由于某种原因计算机不能获取 DHCP 服务器的配置数据，那么Windows将会根据某种算法自动配置为 169.254.x.x 这样的 IP 地址。显然，这样的 IP 以及相关的配置信息是不能让我们真正接入 Internet 的，为什么？既然不能接入 Internet，那么Winodws系统采用这样的方案有什么意义？</p>
+
+                        <h5>回答</h5>
+                        <p>可以让同一子网下的主机进行通讯</p>
+
+                    </div>
+                    <div>
+                        <h3>6.netstat</h3>
+                        <h4>实作一</h4>
+                        <p>Windows 系统将一些常用的端口与服务记录在 C:\WINDOWS\system32\drivers\etc\services 文件中，请查看该文件了解常用的端口号分配。</p>
+
+                        <img src="picture\netstat.png" width="50%"/>
+                        <h4>实作二</h4>
+                        <p>使用 netstat -an 命令，查看计算机当前的网络连接状况。更多的 netstat 命令选项</p>
+                        <p>使用 netstat -an 结果</p>
+                        <img src="picture\netstatan.png" width="50%"/>
+                    </div>
+                    <div>
+                        <h3>7.DNS</h3>
+                        <h4>实作一</h4>
+                         <p>Windows 系统将一些固定的/静态的 DNS 信息记录在 C:\WINDOWS\system32\drivers\etc\hosts 文件中，如我们常用的 localhost 就对应 127.0.0.1 。请查看该文件看看有什么记录在该文件中。</p>
+
+                         <img src="picture\7.1.png" width="50%" height="50%"/>
+                        
+                         <h4>实作二</h4>
+                          <p>解析过的 DNS 记录将会被缓存，以利于加快解析速度。请使用 ipconfig /displaydns 命令查看。我们也可以使用 ipconfig /flushdns 命令来清除所有的 DNS 缓存。</p>
+                          <h5>ipconfig /displaydns</h5>
+                          <img src="picture\7.2.1.png" width="50%" /> 
+                           <h5>ipconfig /flushdns</h5>
+                           <img src="picture\7.2.2.png" width="50%" />
+                       <h4>实作三</h4>
+                           <p>使用 nslookup qige.io 命令，将使用默认的 DNS 服务器查询该域名。当然你也可以指定使用 CloudFlare（1.1.1.1）或 Google（8.8.8.8） 的全球 DNS 服务器来解析</p>
+                           <img src="picture\7.3.png" width="50%"/>
+                    </div>
+                    <div>
+                        <h3>8.cache</h3>
+                           <h4>实作一</h4>
+                           <p>打开 Chrome 或 Firefox 浏览器，访问 https://qige.io ，接下来敲 F12 键 或 Ctrl + Shift + I 组合键打开开发者工具，选择 Network 面板后刷新页面，你会在开发者工具底部看到加载该页面花费的时间。请进一步查看哪些文件被 cache了，哪些没有。</p>
+                           <img src="picture\8.1.png" width="50%" />
+                           <h4>实作二</h4>
+                           <p>接下来仍在 Network 面板，选择 Disable cache 选项框，表明当前不使用 cache，页面数据全部来自于 Internet，刷新页面，再次在开发者工具底部查看加载该页面花费的时间。你可比对与有 cache 时的加载速度差异。</p>
+                           <img src="picture\8.2.png" width="50%"/>
+                           <p>禁用了缓存之后加载时间大大增多</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2>Wireshark 实验</h2>
+                <div>
+                    <diV>
+                        <h3>一、数据链路层</h3>
+                        <h4>实作一 熟悉 Ethernet 帧结构</h4>
+                        <p>使用 Wireshark 任意进行抓包，熟悉 Ethernet 帧的结构，如：目的 MAC、源 MAC、类型、字段等。</p>
+                        <img src="picture\w1.1.png" width="50%"/>
+                        <p>Destination : 目的MAC</p>
+                        <p>source: 源MAC</p>
+                        <p>Type:类型</p>
+                        <h5>问题</h5>
+                        <p>你会发现 Wireshark 展现给我们的帧中没有校验字段，请了解一下原因。</p>
+                        <h5>回答</h5>
+                        <p>是因为有时校验和会由网卡计算，这时Wireshark抓到的本机发送的数据包的校验和都是错误的，所以默认关闭了Wireshark自己的校验</p>
+                        <h4>实作二 了解子网内/外通信时的 MAC 地址</h4>
+                        <p>1.ping 你旁边的计算机（同一子网），同时用 Wireshark 抓这些包（可使用 icmp 关键字进行过滤以利于分析），记录一下发出帧的目的 MAC 地址以及返回帧的源 MAC 地址是多少？这个 MAC 地址是谁的？</p>
+                         <h5>ping 192.168.3.101</h5>
+                        <img  src="picture\w1.2.1.png" width="50%" />
+                        <img src="picture\w1.2.png" width="50%"/>
+                         <p>目的MAC：40:1c:83:a8:68:12；源MAC：c8:09: a8:f6:94:47;MAC地址是同一子网下的另一个主机的 </p>
+                        <p>2. ping qige.io （或者本子网外的主机都可以），同时用 Wireshark 抓这些包（可 icmp 过滤），记录一下发出帧的目的 MAC 地址以及返回帧的源 MAC 地址是多少？这个 MAC 地址是谁的？</p>
+                        <h5>ping qige.io</h5>
+                        <img src="picture\w1.2.2.png" width="50%" />
+                        <p>目的MAC：3c:06:a7:78:77:93 ;源MAC：c8:09: a8:f6:94:47;
+                        这个地址为主机网关的地址        </p>
+                        <img src="picture\w1.2.3.png" width="50%" />
+                        <p>3.再次 ping www.cqjtu.edu.cn （或者本子网外的主机都可以），同时用 Wireshark 抓这些包（可 icmp 过滤），记录一下发出帧的目的 MAC 地址以及返回帧的源 MAC 地址又是多少？这个 MAC 地址又是谁的？</p>
+                        <h5>ping www.cqjtu.edu.cn </h5>
+                        <img src="picture\w1.2.4.png" width="50%"/>
+                        <p>目的MAC和源MAC和ping qige.io一样，可能应为我都抓取的第一个，应该是从主机到网关或者是子网出口。</p>
+                        <h4>实作三 掌握 ARP 解析过程</h4>
+                        <p>1.为防止干扰，先使用 arp -d * 命令清空 arp 缓存</p>
+                        <p>用管理员模式的powershell</p>
+                        
+                        <img src="picture\w1.3.1.png" width="50%"/>
+                        <p>ping 你旁边的计算机（同一子网），同时用 Wireshark 抓这些包（可 arp 过滤），查看 ARP 请求的格式以及请求的内容，注意观察该请求的目的 MAC 地址是什么。再查看一下该请求的回应，注意观察该回应的源 MAC 和目的 MAC 地址是什么。</p>
+                         <img src="picture\1.3.2.png" width="50%" />
+                         <p>ARP第一个请求为Who has 192.168.3.101? Tell 192.168.3.102 ，目的地址为同一子网下的主机，源地址为本机</p>
+                         <p>ping qige.io</p> 
+                         <img src="picture\w1.3.4.png" width="50%"/>
+                         <img src="picture\w1.3.5.png" width="50%"/>
+                         <p>ping了qige。io 但是显示没有包，去掉ip限制条件是上一次的结果，但是也进行了清空缓存，如果没有清空也不会不存在。这里有问题</p>
+                        
+                        </diV>
+                        <div>
+                            <h3>二.网络层</h3>
+                            <h4>实作一熟悉 IP 包结构</h4>
+                            <p>使用 Wireshark 任意进行抓包（可用 ip 过滤），熟悉 IP 包的结构，如：版本、头部长度、总长度、TTL、协议类型等字段。</p>
+                            <img src="picture\w2.1.1.png" width="50%"/>
+                            <p>version:版本 ，下一行是报头长度，再下一行是服务类型 </p>
+                            <p>Total Length:总长度</p>
+                            <p>ime to live是TTL </p>
+                            <h5>问题</h5>
+                            <p>问题：为提高效率，我们应该让 IP 的头部尽可能的精简。但在如此珍贵的 IP 头部你会发现既有头部长度字段，也有总长度字段。请问为什么？</p>
+                            <h5>回答</h5>
+                            <p>方便识别长度，不用花费时间计算，减少时间消耗</p>
+                            <h4>实作二 IP 包的分段与重组</h4>
+                            <p>缺省的，ping 命令只会向对方发送 32 个字节的数据。我们可以使用 ping 202.202.240.16 -l 2000 命令指定要发送的数据长度。此时使用 Wireshark 抓包（用 ip.addr == 202.202.240.16 进行过滤），了解 IP 包如何进行分段，如：分段标志、偏移量以及每个包的大小等</p>
+                            <h5>ping 202.202.240.16 -l 2000</h5>
+                            <img src="picture\w2.2.1.png" width="50%"/>
+                            <p>我们可以看到第一个包的总长度为1500，偏移量为0</p>
+                            <img src="picture\w2.2.2.png" width="50%" />
+                            <p>第二个包的总长度为548，偏移量为1480</p>
+                            <p>当包的长度大于1500时就会分成两个包一起发</p>
+                            <h5>问题</h5>
+                            <p>分段与重组是一个耗费资源的操作，特别是当分段由传送路径上的节点即路由器来完成的时候，所以 IPv6 已经不允许分段了。那么 IPv6 中，如果路由器遇到了一个大数据包该怎么办？</p>
+                            <h5>回答</h5>
+                            <p>会将其丢弃掉</p>
+                            <h4>实作三考察 TTL 事件</h4>
+                            <p> 请使用 tracert www.baidu.com 命令进行追踪，此时使用 Wireshark 抓包（用 icmp 过滤），分析每个发送包的 TTL 是如何进行改变的，从而理解路由追踪原理。</p>
+                            <h5>tracert www.baidu.com</h5>
+                            <img   src="picture\w2.3.2.png" width="50%" />
+                            <h5>抓包</h5>
+                            <img src="picture\w2.3.1.png" width="50%" />
+                            <p>每跳转一次，TTL加一信息返回给主机直到到达主机的目的地址或达到TTL上限最大值丢弃</p>
+                            <h5>问题</h5>
+                            <p>在 IPv4 中，TTL 虽然定义为生命期即 Time To Live，但现实中我们都以跳数/节点数进行设置。如果你收到一个包，其 TTL 的值为 50，那么可以推断这个包从源点到你之间有多少跳？</p>
+                            <h5>回答</h5>
+                            <p>50次</p>
+                        </div>
+                        <div>
+                            <h3>三.传输层</h3>
+                            <h4>实作一熟悉 TCP 和 UDP 段结构</h4>
+                            <p>1.用 Wireshark 任意抓包（可用 tcp 过滤），熟悉 TCP 段的结构，如：源端口、目的端口、序列号、确认号、各种标志位等字段。</p>
+                            <img src="picture\w3.1.1.png" width="50%"/>
+                            <p>Source Port 源端口号</p>
+                            <p>Destination Port 目的端口号</p>
+                            <p>Sequence Number 序列号</p>
+                            <p>Acknowledgment Number 确认号</p>
+                            <h5>问题</h5>
+                            <p>由上大家可以看到 UDP 的头部比 TCP 简单得多，但两者都有源和目的端口号。请问源和目的端口号用来干什么？</p>
+                            <h5>回答</h5>
+                            <p>TCP段和UDP报文的报头包含源端口号，用于识别提供数据的进程，以及用于识别将接收数据的进程的目标端口号。</p>
+                            <h4>实作二 分析 TCP 建立和释放连接</h4>
+                            <p>打开浏览器访问 qige.io 网站，用 Wireshark 抓包（可用 tcp 过滤后再使用加上 Follow TCP Stream），不要立即停止 Wireshark 捕获，待页面显示完毕后再多等一段时间使得能够捕获释放连接的包。</p>
+                            <img src="picture\w3.2.1.png" width="50%"/>
+                            <h5>问题</h5>
+                            <p>2.请在你捕获的包中找到三次握手建立连接的包，并说明为何它们是用于建立连接的，有什么特征。</p>
+                             <h5>答案</h5>
+                             <p> 第一次握手，SYN是1，ACK是0</p>
+                             <p> 第二次握手，SYN是1，ACK是1</p>
+                             <p> 第三次握手，SYN是0，ACK是1</p>
+                            
+                             <p>2.请在你捕获的包中找到四次挥手释放连接的包，并说明为何它们是用于释放连接的，有什么特征。</p>
+                            <h5>答</h5>
+                             <p>通过发送FIN报文释放以[fan,ack]作为标志位</p>
+                             <h5>问题1</h5>
+                             <p>去掉 Follow TCP Stream，即不跟踪一个 TCP 流，你可能会看到访问 qige.io 时我们建立的连接有多个。请思考为什么会有多个连接？作用是什么？</p>
+                             <h5>回答</h5>
+                             <p>数据传输完成就会断开连接，这样的连接有多个，是为了实现多个用户进行访问，不让其长期占用通道。</p>
+                             <h5>问题2</h5>
+                             <p>我们上面提到了释放连接需要四次挥手，有时你可能会抓到只有三次挥手。原因是什么？</p>
+                             <h5>回答</h5>
+                             <p>是因为第二次握手和第三次挥手合并了，FIN报文用在本端没有数据发送给对方时，关闭从本端到对端的连接。但是并不影响从对方到本端的连接，也就是说本端仍然可以接收对方的数据。即发送通道关闭，接收通道正常。
+                                如果对方收到本端FIN报文时，对方的接收通道就会关闭。此时，如果对方也没有数据发给本端，那么对方也会发送FIN给本端，用于关闭从对方到本端的连接，这时候就可能出现ACK和FIN合在一起的情况。
+                                当然，如果对方仍然有数据发送，那么就等数据发完，再发FIN来关闭连接，这时候就是四次挥手了。（网上搜到的解释）</p>                       
+                       
+                            </div>
+                            <div>
+                                <h3>四.应用层</h3>
+                                <h4>实作一 了解 DNS 解析</h4>
+                                <p>1.先使用 ipconfig /flushdns 命令清除缓存，再使用 nslookup qige.io 命令进行解析，同时用 Wireshark 任意抓包（可用 dns 过滤）。</p>
+                                 <h5>ipconfig /flushdns 命令清除缓存 nslookup qige.io 命令进行解析</h5>
+                                 <img src="picture\w4.1.1.png" width="50%"/>
+                                 <h5>用 Wireshark 任意抓包（可用 dns 过滤)</h5>
+                                 <img src="picture\w4.1.2.png" width="50%" />
+                                 <p>计算机使用UDP，向默认端口53发送请求，端口回应了个135</p>
+                                <h4>实作二 了解 HTTP 的请求和应答</h4>
+                                <p>打开浏览器访问 qige.io 网站，用 Wireshark 抓包（可用http 过滤再加上 Follow TCP Stream），不要立即停止 Wireshark 捕获，待页面显示完毕后再多等一段时间以将释放连接的包捕获。</p>
+                                <img src="picture\w4.2.1.png" width="50%" />
+                                <p>2.请在你捕获的包中找到 HTTP 请求包，查看请求使用的什么命令，如：GET, POST。并仔细了解请求的头部有哪些字段及其意义。</p>
+                                <p>用的post命令</p>
+                                <h5>部分请求头字段的具体含义</h5>
+                                <p>Accept：浏览器可接受的MIME类型。 Accept-Charset：浏览器可接受的字符集。</p>
+                                <p>Authorization：授权信息，通常出现在对服务器发送的WWW-Authenticate头的应答中。</p>
+                                <p>Accept-Encoding：浏览器能够进行解码的数据编码方式，比如gzip。</p>
+                                <p>Referer：包含一个URL，用户从该URL代表的页面出发访问当前请求的页面。</p>
+                                <p>3.请在你捕获的包中找到 HTTP 应答包，查看应答的代码是什么，如：200, 304, 404 等。并仔细了解应答的头部有哪些字段及其意义。</p>
+                                <img src="picture\w4.2.2.png" width="50%"/>
+                                <p>答应代码为200</p>
+                                <h5>部分响应码的具体含义</h5>
+                                <p>100 Continue 初始的请求已经接受，客户应当继续发送请求的其余部分。</p>
+                                <p>200 OK 一切正常</p>
+                                <p>201 Created 服务器已经创建了文档，Location头给出了它的URL。</p>
+                                <p>302 Moved Temporatily 类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。</p>
+                                <p>400 Bad Request 请求出现语法错误。</p>
+                                <p>404 Not Found 无法找到指定位置的资源。这也是一个常用的应答</p>
+                                <p>500 Internal Server Error 服务器遇到了意料不到的情况，不能完成客户的请求。</p>
+                                <h5>问题</h5>
+                                <p>刷新一次 qige.io 网站的页面同时进行抓包，你会发现不少的 304 代码的应答，这是所请求的对象没有更改的意思，让浏览器使用本地缓存的内容即可。那么服务器为什么会回答 304 应答而不是常见的 200 应答？</p>
+                                <h5>回答</h5>
+                                <p>浏览器中的缓存，可以直接在缓存区获取到需要的内容，不需要服务器在回复对应的内容，可以减少服务器的一些工作，减小开销。采用200应答就是要完全的将内容发送给客服端，这个会增加服务器的一些开销等</p>
+                            </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
